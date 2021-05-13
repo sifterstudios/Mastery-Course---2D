@@ -4,18 +4,16 @@ using UnityEngine;
 public class CharacterAnimation : MonoBehaviour
 {
     Animator _animator;
-    PlayerMovementController _playerMovementController;
+    IMove _mover;
 
     void Awake()
     {
         _animator = GetComponent<Animator>();
-        _playerMovementController = GetComponent<PlayerMovementController>();
+        _mover = GetComponent<IMove>();
     }
 
     void Update()
     {
-
-
-        _animator.SetFloat("Speed", _playerMovementController.Speed);
+        _animator.SetFloat("Speed", _mover.Speed);
     }
 }
