@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     float _jumpForce = 400;
     Rigidbody2D _rb;
     CharacterGrounding _characterGrounding;
+    public float Speed { get; private set; }
 
 
     void Awake()
@@ -20,6 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
+        Speed = Mathf.Abs(horizontal);
 
         Vector3 movement = new Vector3(horizontal, 0);
 
