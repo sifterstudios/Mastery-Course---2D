@@ -1,16 +1,20 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterGrounding))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = 2;
     float _jumpForce = 400;
     Rigidbody2D _rb;
+    CharacterGrounding _characterGrounding;
 
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _characterGrounding = GetComponent<CharacterGrounding>();
     }
 
     void Update()
@@ -21,7 +25,7 @@ public class PlayerMovementController : MonoBehaviour
 
         transform.position += movement * (Time.deltaTime * _moveSpeed);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && _characterGrounding.IsGrounded)
         {
             _rb.AddForce(Vector2.up * _jumpForce);
         }

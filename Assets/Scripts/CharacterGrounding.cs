@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CharacterGrounding : MonoBehaviour
@@ -7,12 +6,12 @@ public class CharacterGrounding : MonoBehaviour
     [SerializeField] Transform _rightFoot;
     [SerializeField] float _maxDistance;
     [SerializeField] LayerMask _layerMask;
-    [SerializeField] bool _isGrounded;
+    public bool IsGrounded { get; private set; }
 
     void Update()
     {
         CheckFootForGrounding(_leftFoot);
-        if (_isGrounded == false)
+        if (IsGrounded == false)
             CheckFootForGrounding(_rightFoot);
     }
 
@@ -22,11 +21,11 @@ public class CharacterGrounding : MonoBehaviour
         Debug.DrawRay(foot.position, Vector3.down * _maxDistance, Color.red);
         if (raycastHit.collider != null)
         {
-            _isGrounded = true;
+            IsGrounded = true;
         }
         else
         {
-            _isGrounded = false;
+            IsGrounded = false;
         }
     }
 }
